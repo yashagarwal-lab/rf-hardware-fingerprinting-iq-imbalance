@@ -29,8 +29,8 @@ def peak_irr(filepath):
     return irr
 
 print("Radio D:")
-print(peak_irr("reference/radio_D_1.sigmf-data"))
-print(peak_irr("reference/radio_D_2.sigmf-data"))
-print(peak_irr("reference/radio_D_3.sigmf-data"))
+print(peak_irr(("data/reference/radio_D_" if os.path.exists("data/reference") else "reference/radio_D_"1.sigmf-data"))
+print(peak_irr(("data/reference/radio_D_" if os.path.exists("data/reference") else "reference/radio_D_"2.sigmf-data"))
+print(peak_irr(("data/reference/radio_D_" if os.path.exists("data/reference") else "reference/radio_D_"3.sigmf-data"))
 print("Unknown:")
-print(peak_irr("unknown/unknown_transmission.sigmf-data"))
+print(peak_irr(("data/unknown/unknown_transmission.sigmf-data" if os.path.exists("data/unknown") else "unknown/unknown_transmission.sigmf-data")))

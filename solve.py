@@ -38,12 +38,14 @@ def analyze_file(filepath):
     return fc, 10*np.log10(pwr), sym_rate
 
 print("Reference Radios:")
-refs = sorted(glob.glob("reference/*.sigmf-data"))
+ref_pat = "data/reference/*.sigmf-data" if os.path.exists("data/reference") else "reference/*.sigmf-data"
+refs = sorted(glob.glob(ref_pat))
 for ref in refs:
     fc, pwr, sym_rate = analyze_file(ref)
     name = os.path.basename(ref).split('.')[0]
     print(f"{name:12s}: fc = {fc:8.1f} Hz, pwr = {pwr:6.2f} dB, sym_rate = {sym_rate:6.1f} Hz")
 
 print("\nUnknown:")
-unk_fc, unk_pwr, unk_sym = analyze_file("unknown/unknown_transmission.sigmf-data")
+unk_f = "data/unknown/unknown_transmission.sigmf-data" if os.path.exists("data/unknown") else "unknown/unknown_transmission.sigmf-data"
+unk_fc, unk_pwr, unk_sym = analyze_file(unk_f)
 print(f"Unknown     : fc = {unk_fc:8.1f} Hz, pwr = {unk_pwr:6.2f} dB, sym_rate = {unk_sym:6.1f} Hz")

@@ -74,12 +74,13 @@ def complex_imbalance(filepath):
     return fc, irr, angle
 
 print("Reference Radios:")
-refs = sorted(glob.glob("reference/*.sigmf-data"))
+ref_pat = "data/reference/*.sigmf-data" if os.path.exists("data/reference") else "reference/*.sigmf-data"
+refs = sorted(glob.glob(ref_pat))
 for ref in refs:
     fc, irr, angle = complex_imbalance(ref)
     name = os.path.basename(ref).split('.')[0]
     print(f"{name:12s}: fc = {fc:8.1f} Hz, IRR = {irr:6.2f} dB, Angle = {angle:6.1f} deg")
 
 print("\nUnknown:")
-unk_fc, unk_irr, unk_angle = complex_imbalance("unknown/unknown_transmission.sigmf-data")
+unk_fc, unk_irr, unk_angle = complex_imbalance("data/unknown/unknown_transmission.sigmf-data" if os.path.exists("data/unknown") else "unknown/unknown_transmission.sigmf-data")
 print(f"Unknown     : fc = {unk_fc:8.1f} Hz, IRR = {unk_irr:6.2f} dB, Angle = {unk_angle:6.1f} deg")
